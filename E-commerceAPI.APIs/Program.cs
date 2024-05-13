@@ -50,7 +50,6 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-#endregion
 var app = builder.Build();
 
 # region MiddleWare
