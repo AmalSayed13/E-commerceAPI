@@ -1,10 +1,9 @@
-﻿using E_commerceAPI.BL.Dtos.Cart;
-using E_commerceAPI.BL.Managers.CartItems;
-using E_commerceAPI.BL.Managers.Products;
-using Microsoft.AspNetCore.Authorization;
+﻿using E_commerceAPI.BL.Managers.Carts;
+using E_commerceAPI.BL.Dtos.Cart;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
+using E_commerceAPI.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_commerceAPI.APIs.Controllers
 {
@@ -13,112 +12,98 @@ namespace E_commerceAPI.APIs.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartManager _cartManager;
-        private readonly IProductManager _productManager;
 
-        public CartController(ICartManager cartManager , IProductManager productManager)
+        public CartController(ICartManager cartManager)
         {
             _cartManager = cartManager;
-            _productManager = productManager;
+        }
+
+        [HttpGet]
+        public ActionResult GetCart()
+        {
+            try
+            {
+                var cart = _cartManager.GetCart();
+                return Ok(cart);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
         [Authorize]
-        [HttpGet]
-        public ActionResult<IEnumerable<CartItemReadDto>> GetAll()
+        [HttpPost("{productId}/{quantity}")]
+        public ActionResult AddToCart(int productId, int quantity)
         {
             try
             {
-                var cartItems = _cartManager.GetALL();
-                return Ok(cartItems);
+                _cartManager.AddToCart(productId, quantity);
+                return Ok("Item added to cart successfully");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest($"Error adding item to cart: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred while retrieving cart items: {ex.Message}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 
-        [HttpPost]
-        [Route("{productId}/{Quantity}")]
-        public IActionResult AddToCart(int productId, int Quantity)
+
+        [HttpDelete("{productId}")]
+        [Authorize]
+        public ActionResult RemoveFromCart(int productId)
         {
             try
             {
-                var product = _productManager.GetById(productId);
-                if (product != null)
-                {
-                    var item = _cartManager.GetByProductId(productId);
-                    if (item != null)
-                    {
-                        _cartManager.AddToCart(productId, Quantity);
-                        return Ok($"Done! Added product with ID {productId} to the cart.");
-                    }
-                    else
-                    {
-                        return NotFound($"Sorry!!Product with ID {productId} already exists in the cart.");
-                    }
-                }
-                else
-                {
-                    return NotFound($"Sorry!!Product with ID {productId} Not Found in Products");
-                }
+                _cartManager.RemoveFromCart(productId);
+                return Ok($"Product with ID {productId} removed from cart");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest($"Error removing item from cart: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred while adding the product to the cart: {ex.Message}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 
+        [HttpPut("{productId}/{quantity}")]
+        [Authorize]
+        public ActionResult EditCartItemQuantity(int productId, int quantity)
+        {
+            try
+            {
+                _cartManager.EditCartItemQuantity(productId, quantity);
+                return Ok($"Quantity of product with ID {productId} in cart updated successfully");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest($"Error editing item quantity in cart: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         [HttpDelete]
-        [Route("{productId}")]
-        public IActionResult RemoveFromCart(int productId)
+        [Authorize]
+        public ActionResult ClearCart()
         {
             try
             {
-                
-                    var item = _cartManager.GetByProductId(productId);
-                    if (item != null)
-                    {
-                        _cartManager.RemoveFromCart(productId);
-                        return Ok($"Done! Removed product with ID {productId} from the cart.");
-                    }
-                    else
-                    {
-                        return NotFound($"Sorry!!Product with ID {productId} was not found in the cart.");
-                    }
-                }
-               
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred while removing the product from the cart: {ex.Message}");
+                _cartManager.ClearCart();
+                return Ok($"Done! Clear cart ");
             }
-        }
-
-        [HttpPut]
-        [Route("{productId}/{Quantity}")]
-        public IActionResult EditCartItemQuantity(int productId, int Quantity)
-        {
-            try
+            catch (ArgumentException ex)
             {
-                var product = _productManager.GetById(productId);
-                if (product != null)
-                {
-                    var item = _cartManager.GetByProductId(productId);
-                if (item != null)
-                {
-                    _cartManager.EditCartItemQuantity(productId, Quantity);
-                    return Ok($"Done! Edited quantity of product with ID {productId}.");
-                }
-                else
-                {
-                    return NotFound($"Sorry!! Product with ID {productId} was not found in the cart.");
-                }
-            }
-                 else
-                {
-                    return NotFound($"Sorry!!Product with ID {productId} Not Found in Products");
-                }
+                return BadRequest($"Error : {ex.Message}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred while editing the quantity of the product in the cart: {ex.Message}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

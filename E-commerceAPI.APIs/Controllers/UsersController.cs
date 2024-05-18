@@ -1,6 +1,6 @@
 ﻿using E_commerceAPI.BL.Dtos.User;
 using E_commerceAPI.DAL.Data.Models;
-using Microsoft.AspNetCore.Http;
+using E_commerceAPI.DAL.Data.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -67,7 +67,8 @@ namespace E_commerceAPI.APIs.Controllers
                 Email = registerDto.Email,
                 Address = registerDto.Address,
                 PhoneNumber = registerDto.PhoneNumber,
-                Age = registerDto.Age
+                Age = registerDto.Age,
+                
             };
         var result = await _userManager.CreateAsync(user, registerDto.Password);
             if(!result.Succeeded)
@@ -82,10 +83,10 @@ namespace E_commerceAPI.APIs.Controllers
                 new (ClaimTypes.Email, user.Email),
                 new ("PhoneNumber", user.PhoneNumber),
                 new ("Address", user.Address),
-                new (ClaimTypes.Role, "User"),
+                new ("Role", user.UserRole)         
             };
           await  _userManager.AddClaimsAsync(user, claims);
-            return NoContent();
+            return Ok("Register Successflly, Please login");
         }
     }
 }

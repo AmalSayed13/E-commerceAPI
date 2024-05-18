@@ -56,20 +56,23 @@ namespace E_commerceAPI.DAL.Data.Context
             modelBuilder.Entity<User>().HasData(users);
 
             var carts = new List<Cart>
-            {
-                new Cart { ID = 1, UserId = "1" },
-                new Cart { ID = 2, UserId = "2" }
-            };
+{
+            new Cart { ID = 1, UserId = "1" },
+            new Cart { ID = 2, UserId = "2" }
+};
 
             modelBuilder.Entity<Cart>().HasData(carts);
 
             var cartItems = new List<CartItem>
-            {
-                new CartItem { ID = 1, Quantity = 1, Price = 66666, CreatedDate = DateTime.Now, CartId = 1, ProductId = 1 },
-                new CartItem { ID = 2, Quantity = 1, Price = 59750, CreatedDate = DateTime.Now, CartId = 2, ProductId = 2 }
-            };
+{
+    new CartItem { ID = 1, Quantity = 1, Price = 66666, CreatedDate = DateTime.Now, CartId = 1, ProductId = 1 },
+    new CartItem { ID = 2, Quantity = 1, Price = 59750, CreatedDate = DateTime.Now, CartId = 1, ProductId = 2 },
+    new CartItem { ID = 3, Quantity = 1, Price = 66666, CreatedDate = DateTime.Now, CartId = 2, ProductId = 1 },
+    new CartItem { ID = 4, Quantity = 1, Price = 59750, CreatedDate = DateTime.Now, CartId = 2, ProductId = 2 }
+};
 
             modelBuilder.Entity<CartItem>().HasData(cartItems);
+
 
             var orders = new List<Order>
             {

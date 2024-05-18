@@ -1,4 +1,6 @@
-﻿using E_commerceAPI.BL.Managers.CartItems;
+﻿using E_commerceAPI.BL.Managers.Carts;
+using E_commerceAPI.BL.Managers.Categories;
+using E_commerceAPI.BL.Managers.Orders;
 using E_commerceAPI.BL.Managers.Products;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,10 @@ namespace E_commerceAPI.BL
         {
             services.AddScoped<IProductManager, ProductManager>();
             services.AddScoped<ICartManager, CartManager>();
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<ICategoryManager, CategoryManager>();
+
+
 
         }
     }

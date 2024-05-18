@@ -1,8 +1,10 @@
 ﻿using Dtos.Product;
 using E_commerceAPI.BL.Dtos.Product;
 using E_commerceAPI.BL.Managers.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 
 namespace E_commerceAPI.APIs.Controllers
 {
@@ -18,7 +20,7 @@ namespace E_commerceAPI.APIs.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts(string? category, string? name)
+        public ActionResult GetProducts(string? category, string? name)
         {
             try
             {
@@ -32,7 +34,7 @@ namespace E_commerceAPI.APIs.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProductDetails(int id)
+        public ActionResult GetProductDetails(int id)
         {
             try
             {
@@ -48,12 +50,13 @@ namespace E_commerceAPI.APIs.Controllers
                 return StatusCode(500, ex.Message); 
             }
         }
-
+        [Authorize(Policy = "AdminsOnly")]
         [HttpPost]
-        public IActionResult AddProduct(ProductDto productDto)
+        public ActionResult AddProduct(ProductDto productDto)
         {
             try
             {
+                
                 _productManager.AddProduct(productDto);
                 return Ok("Product added successfully");
             }
@@ -66,12 +69,14 @@ namespace E_commerceAPI.APIs.Controllers
                 return StatusCode(500, ex.Message); 
             }
         }
-
         [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id, ProductDto productDto)
+        [Authorize(Policy = "AdminsOnly")]
+
+        public ActionResult UpdateProduct(int id, ProductDto productDto)
         {
             try
             {
+               
                 _productManager.UpdateProduct(id, productDto);
                 return Ok($"Product with ID {id} updated successfully");
             }
@@ -86,10 +91,12 @@ namespace E_commerceAPI.APIs.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
+        [Authorize(Policy = "AdminsOnly")]
+        public ActionResult DeleteProduct(int id)
         {
             try
             {
+              
                 _productManager.DeleteProduct(id);
                 return Ok($"Product with ID {id} deleted successfully");
             }

@@ -4,6 +4,7 @@ using E_commerceAPI.DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_commerceAPI.DAL.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20240518072615_RoleOfAdmin")]
+    partial class RoleOfAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +61,7 @@ namespace E_commerceAPI.DAL.Migrations
                         {
                             ID = 1,
                             CartId = 1,
-                            CreatedDate = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(4964),
+                            CreatedDate = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8225),
                             Price = 66666m,
                             ProductId = 1,
                             Quantity = 1
@@ -67,7 +70,7 @@ namespace E_commerceAPI.DAL.Migrations
                         {
                             ID = 2,
                             CartId = 1,
-                            CreatedDate = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(5014),
+                            CreatedDate = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8277),
                             Price = 59750m,
                             ProductId = 2,
                             Quantity = 1
@@ -76,7 +79,7 @@ namespace E_commerceAPI.DAL.Migrations
                         {
                             ID = 3,
                             CartId = 2,
-                            CreatedDate = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(5019),
+                            CreatedDate = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8281),
                             Price = 66666m,
                             ProductId = 1,
                             Quantity = 1
@@ -85,7 +88,7 @@ namespace E_commerceAPI.DAL.Migrations
                         {
                             ID = 4,
                             CartId = 2,
-                            CreatedDate = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(5023),
+                            CreatedDate = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8285),
                             Price = 59750m,
                             ProductId = 2,
                             Quantity = 1
@@ -187,14 +190,14 @@ namespace E_commerceAPI.DAL.Migrations
                         new
                         {
                             ID = 1,
-                            CreatedDateTime = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(5067),
+                            CreatedDateTime = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8328),
                             TotalPrice = 2500m,
                             UserId = "1"
                         },
                         new
                         {
                             ID = 2,
-                            CreatedDateTime = new DateTime(2024, 5, 18, 11, 6, 24, 746, DateTimeKind.Local).AddTicks(5072),
+                            CreatedDateTime = new DateTime(2024, 5, 18, 10, 26, 12, 400, DateTimeKind.Local).AddTicks(8333),
                             TotalPrice = 3500m,
                             UserId = "2"
                         });
@@ -377,10 +380,6 @@ namespace E_commerceAPI.DAL.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserRole")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -401,16 +400,15 @@ namespace E_commerceAPI.DAL.Migrations
                             Address = "123 Street, City",
                             Age = 30,
                             CartID = 0,
-                            ConcurrencyStamp = "f9d46eca-0307-4ac7-828f-4fd918003e2d",
+                            ConcurrencyStamp = "38df27b2-f191-4327-86ab-a5918a9a9ed6",
                             Email = "user1@example.com",
                             EmailConfirmed = false,
                             Gender = 0,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e896453a-386f-43af-9c02-73630d8060ae",
+                            SecurityStamp = "16c60b59-c629-480f-a0dc-4e370a70ea43",
                             TwoFactorEnabled = false,
-                            UserName = "user1",
-                            UserRole = "Admin"
+                            UserName = "user1"
                         },
                         new
                         {
@@ -419,16 +417,15 @@ namespace E_commerceAPI.DAL.Migrations
                             Address = "456 Avenue, Town",
                             Age = 25,
                             CartID = 0,
-                            ConcurrencyStamp = "306d6060-8409-49c9-a8e7-c4f7f23da2eb",
+                            ConcurrencyStamp = "27b762bc-72d7-4cd9-b932-9115d20c3064",
                             Email = "user2@example.com",
                             EmailConfirmed = false,
                             Gender = 1,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0075d3b6-78c8-4448-947e-1f26e5e55740",
+                            SecurityStamp = "561bad49-ab7c-4704-bf6b-128ea638cd98",
                             TwoFactorEnabled = false,
-                            UserName = "user2",
-                            UserRole = "Admin"
+                            UserName = "user2"
                         });
                 });
 

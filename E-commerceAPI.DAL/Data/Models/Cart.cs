@@ -1,5 +1,6 @@
 ﻿using E_commerceAPI.DAL.Data.Models;
 
+namespace E_commerceAPI.DAL.Data.Models;
 public class Cart
 {
     public int ID { get; set; }

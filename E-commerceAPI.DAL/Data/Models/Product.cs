@@ -12,6 +12,7 @@ namespace E_commerceAPI.DAL.Data.Models
     public class Product
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }= string.Empty;
         public int Rate { get; set; }
         public string? ImageUrl { get; set; } 
@@ -19,6 +20,8 @@ namespace E_commerceAPI.DAL.Data.Models
         
         [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; }
+        [Required]
+        [MinLength(1)]
         public int Count { get; set; }
         //one of product in category
         [Required]

@@ -15,6 +15,8 @@ namespace E_commerceAPI.DAL.Data.Models
         public int Age { get; set; }
         public string Address { get; set; }= string.Empty;
         public Gender Gender { get; set; }
+
+        public string UserRole { get; set; } = "User";
         //User can make many orders
         public ICollection<Order> Orders { get; set; } = [];
 

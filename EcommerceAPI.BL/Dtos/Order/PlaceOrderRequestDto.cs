@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace E_commerceAPI.BL.Dtos.Order
 {
-    public class OrderDetailsDto
+    public class PlaceOrderRequestDto
 {
-       public int Id { get; set; }
-        public IEnumerable<CartItemReadDto> cartItems { get; set; } = [];
+        public List<OrderItemDto>? OrderItems { get; set; }
     }
 }

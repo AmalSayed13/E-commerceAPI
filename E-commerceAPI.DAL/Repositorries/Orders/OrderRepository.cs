@@ -13,27 +13,18 @@ namespace E_commerceAPI.DAL.Repositories.Orders
         {
         }
 
-        public void PlaceOrder(List<OrderItem> orderItems)
+        public void PlaceOrder(Order order)
         {
-            decimal totalPrice = 0;
-            foreach (var orderItem in orderItems)
+            if (order == null)
             {
-                var product = _context.Products.Find(orderItem.ProductId);
-                if (product != null)
-                {
-                    totalPrice += product.Price * orderItem.Quantity;
-                }
+                throw new ArgumentNullException(nameof(order));
             }
 
-            var order = new Order
-            {
-                TotalPrice = totalPrice,
-                CreatedDateTime = DateTime.Now,
-                OrderItems = orderItems
-            };
-
             _context.Orders.Add(order);
+            _context.SaveChanges();
         }
+
+
 
         public IEnumerable<Order> GetOrderHistory()
         {

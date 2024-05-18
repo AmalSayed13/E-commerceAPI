@@ -1,13 +1,14 @@
-﻿using E_commerceAPI.DAL.Data.Models;
-using E_commerceAPI.DAL.Repositorries.Generic;
+﻿using E_commerceAPI.DAL.Repositorries.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace E_commerceAPI.DAL.Repositories.CartItems
+namespace E_commerceAPI.DAL.Repositorries.CartItems
 {
     public interface ICartItemRepository : IGenericRepository<CartItem>
     {
-        void AddToCart(int productId, int quantity);
-        void RemoveFromCart(int productId);
-        void EditCartItemQuantity(int productId, int quantity);
-        Product? GetByProductId(int productId);
+        public IEnumerable<CartItem> GetAllByCartId(int cartId);
     }
 }

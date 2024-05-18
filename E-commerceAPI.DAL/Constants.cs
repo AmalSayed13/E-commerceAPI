@@ -5,6 +5,7 @@
         public static class AppSettings
         {
             public const string SecretKey = "SecretKey";
+
         }
     }
 }

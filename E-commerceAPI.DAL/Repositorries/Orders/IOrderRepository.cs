@@ -6,7 +6,7 @@ namespace E_commerceAPI.DAL.Repositories.Orders
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {
-        void PlaceOrder(List<OrderItem> orderItems);
+        public void PlaceOrder(Order order);
         IEnumerable<Order> GetOrderHistory();
     }
 }

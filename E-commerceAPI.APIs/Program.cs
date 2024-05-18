@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddBLServices();
+builder.Services.AddHttpContextAccessor(); 
 builder.Services.AddDALServices(builder.Configuration);
 #endregion
 
@@ -50,7 +51,22 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+#endregion
+
+#region Authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminsOnly", policy => policy.RequireClaim("Role", "Admin"));
+});
+#endregion
+
 var app = builder.Build();
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin(); 
+    options.AllowAnyMethod(); 
+    options.AllowAnyHeader(); 
+});
 
 # region MiddleWare
 

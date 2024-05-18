@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace E_commerceAPI.BL.Dtos.Cart
 {
-    public class CartItemReadDto
-{
-        public int ID { get; set; }
+    public class CartItemDto
+    {
         public int Quantity { get; set; }
-        public int ProductID { get; set; }
         public decimal Price { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int ProductId { get; set; }
     }
 }

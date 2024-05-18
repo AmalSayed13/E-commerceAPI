@@ -10,4 +10,5 @@ namespace E_commerceAPI.DAL.Data.Models.Enums
     {
         Male, Female
     }
+    
 }
