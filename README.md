@@ -18,8 +18,11 @@ Product and Category Management: Provides CRUD operations for managing products 
 The project follows a N-tier architecture, separating concerns into different layers:
 
 1- Data Access Layer (DAL): Contains Entity Framework Core data models (Models), database context (Data. Context), and repositories (Repositories) for different entities.
+
 2- Business Logic Layer (BL): Implements business logic and operations, Contains managers (Managers) responsible for implementing business logic for different functionalities.
+
 3- API Layer: Exposes RESTful endpoints for clients to interact with the system and contains controllers (Controllers) that define RESTful endpoints for client interaction.
+
 
 ** Technologies Used **
 
