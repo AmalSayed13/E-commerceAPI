@@ -1,4 +1,5 @@
 E-commerce API
+
 ** Overview **
 This project is an E-commerce API designed to facilitate online shopping activities. 
 It provides functionalities such as managing user carts, placing orders, managing products and categories, and user authentication.
