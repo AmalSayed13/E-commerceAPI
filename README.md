@@ -44,12 +44,12 @@ Endpoints:
 Authorization: User authentication is required for accessing these endpoints.
 
 3- ProductsController
-Description: Handles operations related to products, including retrieving, adding, updating, and deleting products.
+Description: Handles operations related to products, including retrieving, adding, updating, and deleting products with image functionality.
 Endpoints:
 - GET /api/products: Retrieves products optionally filtered by category or name.
 - GET /api/products/{id}: Retrieves details of a specific product.
-- POST /api/products: Adds a new product.
-- PUT /api/products/{id}: Updates an existing product.
+- POST /api/products: Adds a new product with upload image functionality.
+- PUT /api/products/{id}: Updates an existing product  with upload image functionality.
 - DELETE /api/products/{id}: Deletes a product.
 Authorization: Add, Update, and delete require admin privileges.
 
