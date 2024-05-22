@@ -61,14 +61,21 @@ namespace E_commerceAPI.BL.Managers.Carts
                 _unitOfWork.CartRepository.Add(cart);
                 _unitOfWork.SaveChanges();
             }
-          
-
+            if (quantity > product!.Count)
+            {
+                throw new ArgumentException($"Sorry! Product with id {productId} Not available in this quantity ,the existing quantity {product.Count}");
+            }
+            if (quantity == 0)
+            {
+                throw new ArgumentException($"Sorry! Product with id {productId} Not available in this quantity ");
+            }
             var cartItem = _unitOfWork.CartItemRepository.GetAllByCartId(cart.ID).FirstOrDefault(item => item.ProductId == productId);
             if (cartItem != null)
             {
                 
                 throw new ArgumentException($"this product allready exsits");
             }
+
            
                 cart.CartItems.Add(new CartItem
                 {
