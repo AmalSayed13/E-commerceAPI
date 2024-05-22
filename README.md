@@ -24,14 +24,6 @@ The project follows a N-tier architecture, separating concerns into different la
 3- API Layer: Exposes RESTful endpoints for clients to interact with the system and contains controllers (Controllers) that define RESTful endpoints for client interaction.
 
 
-** Technologies Used **
-
-ASP.NET Core: Framework for building web APIs.
-Entity Framework Core: ORM for database access.
-Identity Framework: For user authentication and authorization.
-Dependency Injection: Used for managing dependencies and promoting loose coupling.
-postman: Provides API documentation and testing interface.
-
 ** Controllers **
 
 1- CartController 
